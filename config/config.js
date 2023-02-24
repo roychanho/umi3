@@ -13,7 +13,8 @@ export default defineConfig({
   },
   title: 'UMI3', // set title
   // favicon: ""  // if you want to use local image, must open the public folder and get path
-  // dynamicImport: {
-  //   loading: '@/components/loading', // when loading the website will show
-  // },
+  dynamicImport: {
+    loading: '@/components/loading', // when loading the website will show
+  },
+  mountElementId: 'app', // set up react app updated HTML element id to app
 });
