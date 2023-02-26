@@ -1,5 +1,6 @@
 import { defineConfig } from 'umi';
 import routes from './routes';
+import theme from './theme';
 
 export default defineConfig({
   nodeModulesTransform: {
@@ -16,5 +17,6 @@ export default defineConfig({
   dynamicImport: {
     loading: '@/components/loading', // when loading the website will show
   },
-  mountElementId: 'app', // set up react app updated HTML element id to app
+  // mountElementId: 'app', // set up react app updated HTML element id to app
+  theme,
 });
