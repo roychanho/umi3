@@ -1,17 +1,23 @@
 export default [
+  // { path: '/login', component: '@/pages/login' },
+  // { path: '/reg', component: '@/pages/reg' },
   {
     path: '/',
     component: '@/layouts/base-layouts',
     routes: [
-      { path: '/login', component: '@/pages/login' },
-      { path: '/reg', component: '@/pages/reg' },
+      { path: '/login', title: 'LoginPage', component: '@/pages/login' },
+      { path: '/reg', title: 'Register', component: '@/pages/reg' },
       {
         path: '/goods',
-        wrappers: ['@/wrappers/auth'],
+        // wrappers: ['@/wrappers/auth'],
         component: '@/layouts/aside-layouts',
         routes: [
-          { path: '/goods', component: '@/pages/goods' },
-          { path: '/goods/:id', component: '@/pages/goods/goods-detail' },
+          // { path: '/goods', component: '@/pages/goods' },
+          {
+            path: '/goods/:id?',
+            title: 'Shop',
+            component: '@/pages/goods/goods-detail',
+          },
           { path: '/goods/:id/comment', component: '@/pages/goods/comment' },
           {
             path: '/goods/:id/comment/:cid',

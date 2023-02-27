@@ -7,17 +7,52 @@ import Child from './child';
 import { useState } from 'react';
 import AppContext from './context';
 import { request, useRequest } from 'umi';
+import _ from 'lodash';
 // request(url, options) == axios.get(url,options) ==> res.data
 
 export default function IndexPage() {
   const [count, setCount] = useState('');
+  const [todos, setTodos] = useState([]);
+  const [inputValue, setInputValue] = useState('');
+  const [searchValue, setSearchValue] = useState('');
 
-  // const { data, error, loading } = useRequest('/umi/goods');
+  // const { data, error, loading } = useRequest({
+  //   url: 'http://localhost:3000/mock/goods',
+  // });
 
   const getGoods = async () => {
     let res = await request('umi/goods');
     console.log(res);
   };
+
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
+  const handleAddTodo = () => {
+    setTodos([...todos, inputValue]);
+    setInputValue('');
+  };
+
+  const handleSearchChange = (event) => {
+    setSearchValue(event.target.value);
+  };
+
+  // const filteredTodos =
+  //   searchValue === ''
+  //     ? todos
+  //     : todos.filter((todo) => {
+  //         const lowerCaseTodo = todo.toLowerCase();
+  //         const lowerCaseSearchValue = searchValue.toLowerCase();
+  //         return lowerCaseTodo.includes(lowerCaseSearchValue);
+  //       });
+
+  const filteredTodos =
+    searchValue === ''
+      ? todos
+      : _.filter(todos, (todo) =>
+          _.includes(_.lowerCase(todo), _.lowerCase(searchValue)),
+        );
 
   // const { data, error, loading, run } = useRequest(
   //   {
@@ -84,6 +119,15 @@ export default function IndexPage() {
             login
           </button>
         </div>
+
+        <input type="text" value={searchValue} onChange={handleSearchChange} />
+        <ul>
+          {filteredTodos.map((todo) => (
+            <li key={todo}>{todo}</li>
+          ))}
+        </ul>
+        <input type="text" value={inputValue} onChange={handleInputChange} />
+        <button onClick={handleAddTodo}>Add Todo</button>
 
         {/* <Child /> */}
       </div>
