@@ -19,6 +19,7 @@ export default [
           },
         ],
       },
+      { path: '/dva', component: '@/pages/dva' },
       { path: '/', component: '@/pages/index' },
       // { path: '/', redirect: '/login' },
       { component: '@/pages/404' },

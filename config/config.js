@@ -1,8 +1,10 @@
 import { defineConfig } from 'umi';
 import routes from './routes';
 import theme from './theme';
+import proxy from './proxy';
 
 export default defineConfig({
+  proxy,
   nodeModulesTransform: {
     type: 'none', // 'all' slow and best compatibility ,'none' quick normal compatibility
   },

@@ -6,9 +6,48 @@ import user from '../assets/images/531-600x450.jpeg'; // already load
 import Child from './child';
 import { useState } from 'react';
 import AppContext from './context';
+import { request, useRequest } from 'umi';
+// request(url, options) == axios.get(url,options) ==> res.data
 
 export default function IndexPage() {
   const [count, setCount] = useState('');
+
+  // const { data, error, loading } = useRequest('/umi/goods');
+
+  const getGoods = async () => {
+    let res = await request('umi/goods');
+    console.log(res);
+  };
+
+  // const { data, error, loading, run } = useRequest(
+  //   {
+  //     url: '/umi/login',
+  //     method: 'post',
+  //     data: {
+  //       username: 'alex',
+  //       password: 'alex123',
+  //     },
+  //   },
+  //   { manual: true },
+  // );
+
+  // if (loading) {
+  //   return <div>loading...</div>;
+  // }
+  // if (error) {
+  //   return <div>{error.message}</div>;
+  // }
+
+  const login = async () => {
+    let res = await request('umi/login', {
+      method: 'post',
+      data: {
+        username: 'admin',
+        password: 'admin123',
+      },
+    });
+    console.log(res);
+  };
 
   return (
     <AppContext.Provider value={{ count, setCount }}>
@@ -35,12 +74,18 @@ export default function IndexPage() {
           <h3>title</h3>
           <p>testing</p>
         </div>
+        {/* <div>Get data : {JSON.stringify(data)}</div> */}
 
         <div className={styles.bar_right}>
-          <button className={`ant-btn`}>click</button>
+          <button className={`ant-btn`} onClick={getGoods}>
+            click
+          </button>
+          <button className={`ant-btn`} onClick={login}>
+            login
+          </button>
         </div>
 
-        <Child />
+        {/* <Child /> */}
       </div>
     </AppContext.Provider>
   );
