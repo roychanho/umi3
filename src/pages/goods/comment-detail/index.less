@@ -1,0 +1,60 @@
+.title {
+  background: rgb(121, 242, 157);
+}
+
+.test1 {
+  background: url('~@/assets/images/531-600x450.jpeg');
+  // background: url('/img/531-600x450.jpeg');
+}
+
+@width: 100px;
+@height: @width - 80px;
+
+.header {
+  width: @width;
+  height: @height;
+  background: red;
+}
+
+// default 1px and 2px
+.bordered (@topW: 1px, @bottomW: 2px) {
+  border-top: dotted @topW black;
+  border-bottom: solid @bottomW black;
+}
+
+#a1 {
+  color: #111;
+  .bordered();
+}
+
+.a2 {
+  color: red;
+  .bordered(2px, 4px);
+  border-bottom: solid 5px black; // if need the recover the default css
+}
+
+.nesting {
+  color: blue;
+
+  h3 {
+    color: coral;
+  }
+
+  p {
+    color: aqua;
+  }
+}
+
+.bars_right {
+  font-weight: bold;
+
+  :global {
+    .ant-btn {
+      border: 0;
+    }
+
+    .title {
+      background: #fafafa;
+    }
+  }
+}
